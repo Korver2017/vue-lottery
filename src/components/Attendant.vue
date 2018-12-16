@@ -2,10 +2,15 @@
   <div>
     <h1>Hello Every Attendant!</h1>
     <div class="row">
-      <li ref="list" v-for="name in nameList" :key="name" class="avatar d-flex col-2">
-        <p class="m-0">{{ name }}</p>
-        <img ref="pic" class="my-1" src="" alt="">
+      <li ref="list" class="avatar col-3" v-for="(value, key) in localData" :key="key">
+        {{ key }}
+        <img :src="value" alt="">
       </li>
+      <!-- <li ref="list" v-for="name in nameList" :key="name" class="avatar d-flex col-2">
+        <p class="m-0">{{ name }}</p>
+      <img v-for="img in imgs" :key="img" :src="img">
+      
+      </li> -->
     </div>
   </div>
 </template>
@@ -14,18 +19,25 @@
 import { eventBus } from "../main";
 
 export default {
-  props: ["nameList"],
+  // props: ["attObj"],
   data() {
     return {
       value: false,
+      attendantsLoaded: false,
       list: [],
+      localData: {},
     };
   },
   created() {
-    eventBus.$on("changeValue", val => {
+    eventBus.$on('updateData', (data) => {
+      this.localData = data;
+      // alert(this.localData);
+    });
+    eventBus.$on('changeValue', val => {
       this.value = val;
       // console.log(this.value);
       if (this.value === true) {
+        this.list = this.$refs.list;
         var len = this.list.length;
         var current = 0;
         this.list[current].classList.add("customActive");
@@ -33,12 +45,11 @@ export default {
           this.list[current].classList.remove("customActive");
           current += 1;
           if(current === len){
-            // console.log(len);
             current = current % len;
           }
           console.log(current);
           this.list[current].classList.add("customActive");
-        }, 500);
+        }, 300);
         setTimeout(() => {
           clearInterval(timer);
           this.value = false;
@@ -47,35 +58,15 @@ export default {
       }
     });
   },
-  methods: {
-    randomUser() {
-      var picList = this.$refs.pic;
-      var picListLen = picList.length;
-      fetch('https://randomuser.me/api/?results=100&gender=female', {})
-        .then((response) => {
-          console.log(response);
-          return response.json();
-        }).then((jsonData) => {
-          console.log(jsonData.results);
-          for(let i = 0; i < picListLen; i ++){
-            var randomNum = Math.floor((Math.random() * 100) + 1);
-            picList[i].src = jsonData.results[randomNum].picture.medium
-          }
-        }).catch((err) => {
-          console.log('錯誤:', err);
-        });
+  watch: {
+    localObj(){
+      alert('kk');
     }
   },
-  mounted() {
-    this.list = this.$refs.list;
-    console.log(this.list);
-    this.randomUser();
-  }
 };
 </script>
 
 <style scoped lang="scss">
-
 .avatar {
   list-style-type: none;
   border: 2px solid #000;
@@ -94,9 +85,5 @@ export default {
     border-radius: 50%;
     border: 5px solid #000;
   }
-  
-
-  
 }
-
 </style>
