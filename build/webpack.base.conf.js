@@ -34,8 +34,19 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: vueLoaderConfig
+        options: vueLoaderConfig,
       },
+      // {
+      //   test: /\.scss$/,
+      //   use: [
+      //     {
+      //       loader: 'css-loader'
+      //     },
+      //     {
+      //       loader: 'sass-loader'
+      //     }
+      //   ]
+      // },
       {
         test: /\.js$/,
         loader: 'babel-loader',
