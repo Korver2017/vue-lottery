@@ -18,7 +18,7 @@ export default {
   },
   data() {
     return {
-      attendants: ["Alex", "Ben", "Korver"]
+      attendants: ["Alex", "Ben", "Korver", 'aaa', 'bbb', 'ccc']
     };
   }
 };

@@ -28,11 +28,11 @@ export default {
           this.list[current].classList.remove("active");
           // console.log(current);
           // console.log(len);
-          if(current === 3){
-            // console.log(len);
-            current = current % 3;
-          }
           current += 1;
+          if(current === len){
+            // console.log(len);
+            current = current % len;
+          }
           console.log(current);
           this.list[current].classList.add("active");
         }, 500);
