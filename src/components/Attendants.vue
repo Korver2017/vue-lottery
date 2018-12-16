@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Hello Attendants!</h1>
-    <ul class="list-group list-group-flush">
+    <ul class="d-flex p-0">
       <slot>
         <app-attendant :nameList="attendants"></app-attendant>
       </slot>

@@ -19,9 +19,6 @@
         eventBus.$emit('changeValue', this.value);
       }
     },
-    // mounted() {
-    //   console.log(this.$refs.list[0]);
-    // }
   }
 </script>
 
