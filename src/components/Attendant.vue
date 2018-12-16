@@ -4,7 +4,7 @@
     <div class="row">
       <li ref="list" v-for="name in nameList" :key="name" class="avatar d-flex col-2">
         <p class="m-0">{{ name }}</p>
-        <img class="my-1" src="http://picsum.photos/210" alt="">
+        <img ref="pic" class="my-1" src="" alt="">
       </li>
     </div>
   </div>
@@ -47,9 +47,29 @@ export default {
       }
     });
   },
+  methods: {
+    randomUser() {
+      var picList = this.$refs.pic;
+      var picListLen = picList.length;
+      fetch('https://randomuser.me/api/?results=100&gender=female', {})
+        .then((response) => {
+          console.log(response);
+          return response.json();
+        }).then((jsonData) => {
+          console.log(jsonData.results);
+          for(let i = 0; i < picListLen; i ++){
+            var randomNum = Math.floor((Math.random() * 100) + 1);
+            picList[i].src = jsonData.results[randomNum].picture.medium
+          }
+        }).catch((err) => {
+          console.log('錯誤:', err);
+        });
+    }
+  },
   mounted() {
     this.list = this.$refs.list;
     console.log(this.list);
+    this.randomUser();
   }
 };
 </script>

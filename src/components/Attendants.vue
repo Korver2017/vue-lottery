@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Hello Attendants!</h1>
-    <ul class="d-flex p-0">
+    <ul>
       <slot>
         <app-attendant :nameList="attendants"></app-attendant>
       </slot>
