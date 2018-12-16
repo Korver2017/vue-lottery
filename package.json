@@ -58,6 +58,6 @@
     "last 2 versions",
     "not ie <= 8"
   ],
-  "main": ".postcssrc.js",
+  "main": "main.js",
   "license": "ISC"
 }
