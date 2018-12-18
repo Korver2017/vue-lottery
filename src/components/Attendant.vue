@@ -2,15 +2,10 @@
   <div>
     <h1>Hello Every Attendant!</h1>
     <div class="row">
-      <li ref="list" class="avatar col-3" v-for="(value, key) in localData" :key="key">
+      <li ref="list" class="avatar col-3" v-for="(value, key) in attendantsList" :key="key">
         {{ key }}
         <img :src="value" alt="">
       </li>
-      <!-- <li ref="list" v-for="name in nameList" :key="name" class="avatar d-flex col-2">
-        <p class="m-0">{{ name }}</p>
-      <img v-for="img in imgs" :key="img" :src="img">
-      
-      </li> -->
     </div>
   </div>
 </template>
@@ -19,19 +14,17 @@
 import { eventBus } from "../main";
 
 export default {
-  // props: ["attObj"],
   data() {
     return {
       value: false,
-      attendantsLoaded: false,
-      list: [],
-      localData: {},
+      // attendantsLoaded: false,
+      // list: [],
+      attendantsList: {},
     };
   },
   created() {
     eventBus.$on('updateData', (data) => {
-      this.localData = data;
-      // alert(this.localData);
+      this.attendantsList = data;
     });
     eventBus.$on('changeValue', val => {
       this.value = val;
@@ -58,11 +51,11 @@ export default {
       }
     });
   },
-  watch: {
-    localObj(){
-      alert('kk');
-    }
-  },
+  // watch: {
+  //   attendantsList(){
+  //     alert('kk');
+  //   }
+  // },
 };
 </script>
 
