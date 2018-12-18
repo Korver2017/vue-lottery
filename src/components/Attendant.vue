@@ -1,12 +1,10 @@
 <template>
   <div>
-    <h1>Hello Every Attendant!</h1>
-    <div class="row">
-      <li ref="list" class="avatar col-3" v-for="(value, key) in attendantsList" :key="key">
-        {{ key }}
-        <img :src="value" alt="">
-      </li>
-    </div>
+    <li ref="list" class="d-flex avatar col-3" v-for="(value, key) in attendantsList" :key="key">
+      {{ key }}
+      <img :src="value" alt>
+      
+    </li>
   </div>
 </template>
 
@@ -19,14 +17,14 @@ export default {
       value: false,
       // attendantsLoaded: false,
       // list: [],
-      attendantsList: {},
+      attendantsList: {}
     };
   },
   created() {
-    eventBus.$on('updateData', (data) => {
+    eventBus.$on("updateData", data => {
       this.attendantsList = data;
     });
-    eventBus.$on('changeValue', val => {
+    eventBus.$on("changeValue", val => {
       this.value = val;
       // console.log(this.value);
       if (this.value === true) {
@@ -37,7 +35,7 @@ export default {
         var timer = setInterval(() => {
           this.list[current].classList.remove("customActive");
           current += 1;
-          if(current === len){
+          if (current === len) {
             current = current % len;
           }
           console.log(current);
@@ -50,7 +48,7 @@ export default {
         }, 8000);
       }
     });
-  },
+  }
   // watch: {
   //   attendantsList(){
   //     alert('kk');

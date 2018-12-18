@@ -1,6 +1,18 @@
 <template>
-  <div id="app" class="my-3">
-    <div class="container">
+  <div id="app">
+    <div class="container-fluid">
+      <div class="row">
+        <app-header></app-header>
+      </div>
+    </div>
+      <div class="container">
+        <div class="row">
+          <router-view></router-view>
+        </div>
+      </div>
+  </div>
+
+  <!-- <div class="container">
       <div class="row">
         <div class="col">
           <img src="./assets/logo.png">
@@ -21,11 +33,12 @@
           <app-addAttendant></app-addAttendant>
         </div>
       </div>
-    </div>
-  </div>
+  </div>-->
 </template>
 
 <script>
+import appHeader from "./components/Header";
+import appHome from "./components/Home";
 import appAttendants from "./components/Attendants";
 import appLottery from "./components/Lottery";
 import appAddAttendant from "./components/AddAttendant";
@@ -33,9 +46,11 @@ import appAddAttendant from "./components/AddAttendant";
 export default {
   name: "App",
   components: {
+    appHeader,
+    appHome,
     appAttendants,
     appLottery,
-    appAddAttendant,
+    appAddAttendant
   }
 };
 </script>
