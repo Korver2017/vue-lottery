@@ -6,7 +6,7 @@
       <!-- <slot>
         <app-attendant :attObj.sync="attObj" :nameList="attendants" :imgs="imgs"></app-attendant>
       </slot>-->
-      <li ref="list" class="d-flex avatar col-3" v-for="(value, key) in attendantList" :key="key">
+      <li ref="list" class="d-flex avatar col-3" v-for="(value, key) in attendants" :key="key">
         {{ key }}
         <img :src="value" alt>
       </li>
@@ -26,19 +26,11 @@ export default {
   },
   data() {
     return {
-      // attendants: ["Alex", "Ben", "Korver", 'aaa', 'bbb', 'ccc'],
       attendants: {},
-      imgs: [],
-    };
-  },
-  computed: {
-    attendantList() {
-      return this.attendants; 
     }
   },
   created() {
     this.callAPI();
-    console.log('kk');
   },
   methods: {
     callAPI() {
@@ -55,23 +47,13 @@ export default {
               res[i].picture.large;
           }
           console.log(vm.attendants);
-          // eventBus.$emit('passImage', this.imgs);
+          vm.$set(this.attendants, vm.attendants);
         })
-        // .then((res) => {
-
-        //   console.log(res);
-        // })
         .catch(err => {
           console.log(err);
         });
     }
-    // eventBus.$emit('attendantsLoaded', true);
   }
-  // watch: {
-  //   attObj: function(){
-  //     console.log(attObj);
-  //   }
-  // }
 };
 </script>
 
