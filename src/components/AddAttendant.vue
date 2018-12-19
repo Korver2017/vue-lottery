@@ -4,15 +4,13 @@
     <div class="row d-flex justify-content-md-center">
       <form class="col-6">
         <div class="form-group">
-          <label :class="{ 'empty': isEmpty.department }" for="department">Department</label>
-          <input
-            @input="checkDepartment"
-            @blur="checkDepartment"
-            v-model.trim="formData.department"
-            class="form-control"
-            id="department"
-            placeholder="Please Enter Your Department"
-          >
+          <label for="department">Department</label>
+          <br>
+          <select v-model="formData.department" name="department" id="department">
+            <option value="Front-End Engineer">Front-End Engineer</option>
+            <option value="Back-End Engineer">Back-End Engineer</option>
+            <option value="Project Manager">Project Manager</option>
+          </select>
         </div>
         <div class="form-group">
           <label :class="{ 'empty': isEmpty.name }" for="name">Name</label>
@@ -33,12 +31,12 @@
             class="form-check-input"
             id="confirm"
           >
-          <label class="form-check-label" for="confirm">Please Confirm Here</label>
+          <label class="form-check-label" for="confirm">Please Check Your Info Again</label>
         </div>
         <button
-          :disabled="!formData.confirm || formData.department.length === 0 || formData.name.length === 0"
+          :disabled="!formData.confirm || formData.department === '' || formData.name.length === 0"
           @click.prevent="submit"
-          class="btn btn-danger"
+          class="btn btn-success"
         >Submit</button>
       </form>
     </div>
@@ -46,6 +44,8 @@
 </template>
 
 <script>
+import { eventBus } from "../main";
+
 export default {
   data() {
     return {
@@ -55,9 +55,8 @@ export default {
         confirm: false
       },
       isEmpty: {
-        department: false,
         name: false
-      }
+      },
     };
   },
   methods: {
@@ -70,15 +69,18 @@ export default {
           this.formData.name = "";
           this.formData.confirm = false;
         })
+        .then(() => {
+          eventBus.getData();
+        })
         .catch(err => console.log(err));
     },
-    checkDepartment() {
-      if (this.formData.department.length === 0) {
-        this.isEmpty.department = true;
-      } else {
-        this.isEmpty.department = false;
-      }
-    },
+    // checkDepartment() {
+    //   if (this.formData.department.length === 0) {
+    //     this.isEmpty.department = true;
+    //   } else {
+    //     this.isEmpty.department = false;
+    //   }
+    // },
     checkName() {
       if (this.formData.name.length === 0) {
         this.isEmpty.name = true;

@@ -11,7 +11,25 @@ Vue.use(VueRouter);
 Vue.prototype.$http = axios;
 
 /* eslint-disable no-new */
-export const eventBus = new Vue();
+export const eventBus = new Vue({
+  methods: {
+    getData() {
+      this.$http
+        .get("https://vue-lottery.firebaseio.com/attendantList.json")
+        .then(res => {
+          console.log(Object.values(res.data));
+          var attendantsData = Object.values(res.data);
+          eventBus.$emit("catchData", attendantsData);
+
+          // attendantsData.forEach(data => {
+          //   console.log(data.name);
+          //   this.$set(this.attendants.attendantDetail, data.name, data.department);
+          // });
+        })
+        .catch(err => console.log(err));
+    }
+  },
+});
 const router = new VueRouter({
   routes,
   mode: 'history',

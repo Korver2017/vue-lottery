@@ -5,11 +5,13 @@
         <app-header></app-header>
       </div>
     </div>
-      <div class="container">
-        <div class="row">
+    <div class="container">
+      <div class="row">
+        <keep-alive>
           <router-view></router-view>
-        </div>
+        </keep-alive>
       </div>
+    </div>
   </div>
 
   <!-- <div class="container">
@@ -37,20 +39,45 @@
 </template>
 
 <script>
+import { eventBus } from "./main";
 import appHeader from "./components/Header";
-import appHome from "./components/Home";
-import appAttendants from "./components/Attendants";
-import appLottery from "./components/Lottery";
-import appAddAttendant from "./components/AddAttendant";
+// import appHome from "./components/Home";
+// import appAttendants from "./components/Attendants";
+// import appLottery from "./components/Lottery";
+// import appAddAttendant from "./components/AddAttendant";
 
 export default {
   name: "App",
   components: {
-    appHeader,
-    appHome,
-    appAttendants,
-    appLottery,
-    appAddAttendant
+    appHeader
+    // appHome,
+    // appAttendants,
+    // appLottery,
+    // appAddAttendant
+  },
+  created() {
+    // defaultAttendants.forEach(item => {
+    //   this.$set(this.attendants.attendantDetail, item.name, item.department);
+    // });
+    // console.log(this.attendants.attendantDetail);
+    eventBus.getData();
+  },
+  methods: {
+    // getData() {
+    //   this.$http
+    //     .get("https://vue-lottery.firebaseio.com/attendantList.json")
+    //     .then(res => {
+    //       console.log(Object.values(res.data));
+    //       var attendantsData = Object.values(res.data);
+    //       eventBus.$emit("catchData", attendantsData);
+
+    //       // attendantsData.forEach(data => {
+    //       //   console.log(data.name);
+    //       //   this.$set(this.attendants.attendantDetail, data.name, data.department);
+    //       // });
+    //     })
+    //     .catch(err => console.log(err));
+    // }
   }
 };
 </script>
@@ -61,6 +88,4 @@ export default {
 #app {
   text-align: center;
 }
-
-
 </style>

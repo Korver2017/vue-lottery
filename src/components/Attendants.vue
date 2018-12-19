@@ -2,13 +2,15 @@
   <div class="w-100">
     <h1>Hello Attendants!</h1>
     <ul class="d-flex flex-direction-row flex-wrap">
-      <li class="avatar col-3" v-for="(value, key) in attendants.attendantDetail" :key="key">
-        {{ key }} | {{ value }}
-      </li>
+      <li
+        class="avatar col-3"
+        v-for="(value, key) in attendants.attendantDetail"
+        :key="key"
+      >{{ key }} | {{ value }}</li>
       <!-- <li ref="list" class="avatar col-3" v-for="(value, key) in attendants" :key="key">
         {{ key }}
         <img :src="value" alt>
-      </li> -->
+      </li>-->
     </ul>
   </div>
 </template>
@@ -27,20 +29,29 @@ export default {
   data() {
     return {
       attendants: {
-        attendantDetail: {},
-      },
-    }
+        attendantDetail: {}
+      }
+    };
   },
-  created() {
+  mounted() {
     defaultAttendants.forEach(item => {
       this.$set(this.attendants.attendantDetail, item.name, item.department);
     });
     console.log(this.attendants.attendantDetail);
-    this.getData();
-
+    eventBus
+      .$on("catchData", res => {
+        res.forEach(data => {
+          console.log(data.name);
+          this.$set(
+            this.attendants.attendantDetail,
+            data.name,
+            data.department
+          );
+        });
+      });
   },
   methods: {
-    getData(){
+    getData() {
       this.$http
         .get("https://vue-lottery.firebaseio.com/attendantList.json")
         .then(res => {
@@ -48,7 +59,11 @@ export default {
           var attendantsData = Object.values(res.data);
           attendantsData.forEach(data => {
             console.log(data.name);
-            this.$set(this.attendants.attendantDetail, data.name, data.department);
+            this.$set(
+              this.attendants.attendantDetail,
+              data.name,
+              data.department
+            );
           });
         })
         .catch(err => console.log(err));
