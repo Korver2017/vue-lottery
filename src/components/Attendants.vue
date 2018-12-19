@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="w-100">
     <h1>Hello Attendants!</h1>
-    <ul>
+    <ul class="d-flex flex-direction-row flex-wrap">
       <!-- <li v-for="(value, key) in attObj" :key="key">{{ value }}</li> -->
       <!-- <slot>
         <app-attendant :attObj.sync="attObj" :nameList="attendants" :imgs="imgs"></app-attendant>
       </slot>-->
-      <li ref="list" class="d-flex avatar col-3" v-for="(value, key) in attendants" :key="key">
+      <li ref="list" class="avatar col-3" v-for="(value, key) in attendants" :key="key">
         {{ key }}
         <img :src="value" alt>
       </li>

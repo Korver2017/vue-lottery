@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-100">
     <h1>New Attendant Here!</h1>
     <div class="row d-flex justify-content-md-center">
       <form class="col-6">
