@@ -62,9 +62,8 @@ export default {
   },
   methods: {
     submit() {
-      var newAttendant = this.formData;
       this.$http
-        .post("https://vue-lottery.firebaseio.com/attendantList.json", newAttendant)
+        .post("https://vue-lottery.firebaseio.com/attendantList.json", this.formData)
         .then(res => console.log(res))
         .then(() => {
           this.formData.department = "";

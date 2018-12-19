@@ -17,7 +17,7 @@ export default {
       value: false,
       // attendantsLoaded: false,
       // list: [],
-      attendantsList: {}
+      attendantsList: [],
     };
   },
   created() {

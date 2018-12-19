@@ -2,7 +2,7 @@
   <div class="w-100">
     <h1>Hello Attendants!</h1>
     <ul class="d-flex flex-direction-row flex-wrap">
-      <li class="avatar col-3" v-for="(value, key) in attendants.name" :key="key">
+      <li class="avatar col-3" v-for="(value, key) in attendants.attendantDetail" :key="key">
         {{ key }} | {{ value }}
       </li>
       <!-- <li ref="list" class="avatar col-3" v-for="(value, key) in attendants" :key="key">
@@ -27,38 +27,32 @@ export default {
   data() {
     return {
       attendants: {
-        departments: ['Front-End Developer', 'UI/UX Designer'],
-        name: {},
+        attendantDetail: {},
       },
     }
   },
   created() {
     defaultAttendants.forEach(item => {
-      this.$set(this.attendants.name, item.name, item.department);
+      this.$set(this.attendants.attendantDetail, item.name, item.department);
     });
-    console.log(this.attendants.name);
+    console.log(this.attendants.attendantDetail);
+    this.getData();
+
   },
   methods: {
-    // callAPI() {
-    //   let vm = this;
-    //   fetch("https://randomuser.me/api/?results=500&gender=female", {})
-    //     .then(response => {
-    //       console.log(response);
-    //       return response.json();
-    //     })
-    //     .then(jsonData => {
-    //       var res = jsonData.results;
-    //       for (let i = 0; i < 20; i++) {
-    //         vm.attendants[`${res[i].name.first} ${res[i].name.last}`] =
-    //           res[i].picture.large;
-    //       }
-    //       console.log(vm.attendants);
-    //       vm.$set(this.attendants, vm.attendants);
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //     });
-    // }
+    getData(){
+      this.$http
+        .get("https://vue-lottery.firebaseio.com/attendantList.json")
+        .then(res => {
+          console.log(Object.values(res.data));
+          var attendantsData = Object.values(res.data);
+          attendantsData.forEach(data => {
+            console.log(data.name);
+            this.$set(this.attendants.attendantDetail, data.name, data.department);
+          });
+        })
+        .catch(err => console.log(err));
+    }
   }
 };
 </script>
