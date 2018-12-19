@@ -1,12 +1,12 @@
 <template>
-  <div class="flex-grow-1">
+  <div>
     <h1>Hello Attendants!</h1>
     <ul>
       <!-- <li v-for="(value, key) in attObj" :key="key">{{ value }}</li> -->
       <!-- <slot>
         <app-attendant :attObj.sync="attObj" :nameList="attendants" :imgs="imgs"></app-attendant>
       </slot>-->
-      <li ref="list" class="d-flex avatar col-3" v-for="(value, key) in attObj" :key="key">
+      <li ref="list" class="d-flex avatar col-3" v-for="(value, key) in attendantList" :key="key">
         {{ key }}
         <img :src="value" alt>
       </li>
@@ -27,13 +27,18 @@ export default {
   data() {
     return {
       // attendants: ["Alex", "Ben", "Korver", 'aaa', 'bbb', 'ccc'],
-      attendants: [],
+      attendants: {},
       imgs: [],
-      attObj: {}
     };
+  },
+  computed: {
+    attendantList() {
+      return this.attendants; 
+    }
   },
   created() {
     this.callAPI();
+    console.log('kk');
   },
   methods: {
     callAPI() {
@@ -46,18 +51,16 @@ export default {
         .then(jsonData => {
           var res = jsonData.results;
           for (let i = 0; i < 20; i++) {
-            vm.attObj[`${res[i].name.first} ${res[i].name.last}`] =
+            vm.attendants[`${res[i].name.first} ${res[i].name.last}`] =
               res[i].picture.large;
-
-            // this.attendants.push(`${res[i].name.first} ${res[i].name.last}`);
-            // this.imgs.push(res[i].picture.medium);
           }
-          console.log(vm.attObj);
+          console.log(vm.attendants);
           // eventBus.$emit('passImage', this.imgs);
         })
-        .then(() => {
-          eventBus.$emit("updateData", vm.attObj);
-        })
+        // .then((res) => {
+
+        //   console.log(res);
+        // })
         .catch(err => {
           console.log(err);
         });

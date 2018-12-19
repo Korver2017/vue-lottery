@@ -49,11 +49,6 @@ export default {
       }
     });
   }
-  // watch: {
-  //   attendantsList(){
-  //     alert('kk');
-  //   }
-  // },
 };
 </script>
 
