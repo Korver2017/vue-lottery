@@ -17,9 +17,17 @@ export const eventBus = new Vue({
       this.$http
         .get("https://vue-lottery.firebaseio.com/attendantList.json")
         .then(res => {
-          console.log(Object.values(res.data));
+          // console.log(Object.values(res.data));
           var attendantsData = Object.values(res.data);
+          console.log(attendantsData);
           eventBus.$emit("catchData", attendantsData);
+
+          // attendantsData.data.forEach()
+          // this.$set(
+          //   this.attendants.attendantDetail,
+          //   data.name,
+          //   data.department
+          // );
 
           // attendantsData.forEach(data => {
           //   console.log(data.name);

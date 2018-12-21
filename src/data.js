@@ -1,6 +1,6 @@
 export const defaultAttendants = [
   {
-    department: 'Front-End Developer',
+    department: 'Front-End Engineer',
     name: 'Korver',
     img: ''
   },

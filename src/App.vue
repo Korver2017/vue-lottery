@@ -61,6 +61,8 @@ export default {
     // });
     // console.log(this.attendants.attendantDetail);
     eventBus.getData();
+    console.log("kk");
+    
   },
   methods: {
     // getData() {
@@ -70,7 +72,6 @@ export default {
     //       console.log(Object.values(res.data));
     //       var attendantsData = Object.values(res.data);
     //       eventBus.$emit("catchData", attendantsData);
-
     //       // attendantsData.forEach(data => {
     //       //   console.log(data.name);
     //       //   this.$set(this.attendants.attendantDetail, data.name, data.department);

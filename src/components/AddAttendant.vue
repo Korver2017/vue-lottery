@@ -9,6 +9,7 @@
           <select v-model="formData.department" name="department" id="department">
             <option value="Front-End Engineer">Front-End Engineer</option>
             <option value="Back-End Engineer">Back-End Engineer</option>
+            <option value="UI/UX Designer">UI/UX Designer</option>
             <option value="Project Manager">Project Manager</option>
           </select>
         </div>
